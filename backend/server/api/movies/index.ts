@@ -51,7 +51,7 @@ router.get('/', controller.getDetail);
  *       204:
  *         description: Unable to create
  */
- router.post('/', auth.isAuthenticated(), controller.createNew); 
+ router.post('/', controller.createNew); 
 
 /**
  * @openapi
@@ -82,7 +82,7 @@ router.get('/', controller.getDetail);
  *       204:
  *         description: Unable to create
  */
-router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
+router.put('/:id', controller.updateSingle);
 
 /**
  * @openapi
@@ -103,7 +103,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *       204:
  *         description: Unable to get lists
  */
- router.get('/:id', auth.isAuthenticated(), controller.getSingleDetail);
+ router.get('/:id', controller.getSingleDetail);
 
 /**
  * @openapi
@@ -124,7 +124,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/:id', auth.isAuthenticated(), controller.deleteSingle);
+ router.delete('/:id', controller.deleteSingle);
 
 
 module.exports = router; 

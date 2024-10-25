@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/509.58d2d0b0.chunk.js","mappings":"mJAEA,MAIA,EAJkBA,KACTC,EAAAA,EAAAA,KAAA,MAAAC,SAAI,mB","sources":["modules/movie/components/movieItem.tsx"],"sourcesContent":["import React from 'react';\n\nconst MovieItem = () => {\n  return <h2>Movie Item Page</h2>;\n};\n\nexport default MovieItem;"],"names":["MovieItem","_jsx","children"],"sourceRoot":""}

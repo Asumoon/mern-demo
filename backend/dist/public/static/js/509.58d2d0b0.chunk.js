@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[509],{509:(e,n,s)=>{s.r(n),s.d(n,{default:()=>r});s(43);var t=s(579);const r=()=>(0,t.jsx)("h2",{children:"Movie Item Page"})}}]);
+//# sourceMappingURL=509.58d2d0b0.chunk.js.map

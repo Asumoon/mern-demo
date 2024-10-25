@@ -40,12 +40,12 @@ const sidebarStructure = [
       ]
     },
     {
-      id: "documentation",
+      id: "api/docs/v1",
       title: "API Documentation",
-      name: "documentation",
+      name: "api/docs/v1",
       parent: true,
       icon: "dashboard",
-      link: "documentation"
+      link: "api/docs/v1"
     },
   ];
   

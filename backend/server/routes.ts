@@ -15,7 +15,6 @@ export default (app) => {
    app.use('/api/docs', require('./apiDoc'));
    app.use('/api/auth', require('./auth'));
    app.use('/api/settings', require('./api/settings'));
-   app.use('/api/resume', require('./api/resume'));
    app.use('/api/user', require('./api/user'));
    app.use('/api/roles', require('./api/role'));
 

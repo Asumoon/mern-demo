@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Modal, TextField, Button } from "@mui/material";
+import { Snackbar, Modal, TextField, Button } from "@mui/material";
 
 // Define Movie type
 interface Movie {
@@ -18,17 +18,18 @@ function MovieTable() {
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // State to check if editing or adding
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [successMessage, setSuccessMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`/movies?page=${page}`);
+        const res = await axios.get(`/api/movies?page=${page}`);
         setMovies((prevMovies) => [
           ...prevMovies,
           ...(res.data.data as Movie[]),
         ]);
-        console.log("-- xyz movies --> ", movies);
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
@@ -37,13 +38,20 @@ function MovieTable() {
 
     fetchMovies();
   }, [page]);
+  
+
 
   // Define the deleteMovie function
   const deleteMovie = async (title: string) => {
     try {
-      await axios.delete(`/movies/${title}`);
+      await axios.delete(`/api/movies/${title}`);
       // After deleting, update the movies list by filtering out the deleted movie
-      setMovies((prevMovies) => prevMovies.filter((movie) => movie.title !== title));
+      setMovies((prevMovies) =>
+        prevMovies.filter((movie) => movie.title !== title)
+      );
+      // Set success message and show Snackbar
+      setSuccessMessage("Movie deleted successfully!");
+      setOpenSnackbar(true);
     } catch (error) {
       console.error("Error deleting movie:", error);
     }
@@ -86,13 +94,18 @@ function MovieTable() {
     }
   };
 
+  // Close the snackbar
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
   // Handle save (both add and edit)
   const handleSave = async () => {
     if (selectedMovie && validateForm()) {
       if (isEditing) {
         // Edit movie (PUT request)
         try {
-          await axios.put(`/movies/${selectedMovie.title}`, selectedMovie);
+          await axios.put(`/api/movies/${selectedMovie.title}`, selectedMovie);
           setMovies((prevMovies) =>
             prevMovies.map((movie) =>
               movie.title === selectedMovie.title ? selectedMovie : movie
@@ -103,7 +116,7 @@ function MovieTable() {
         }
       } else {
         try {
-          const res = await axios.post("/movies", selectedMovie);
+          const res = await axios.post("/api/movies", selectedMovie);
           setMovies((prevMovies) => [...prevMovies, res.data]); // Add the new movie to the list
         } catch (error) {
           console.error("Error adding movie:", error);
@@ -122,6 +135,24 @@ function MovieTable() {
       });
     }
   };
+  useEffect(() => {
+		const fetchMovies = async () => {
+			setLoading(true);
+			try {
+				const res = await axios.get(`/api/movies?page=${page}`);
+				setMovies((prevMovies) => [
+					...prevMovies,
+					...(res.data.data as Movie[]),
+				]);
+				console.log("-- xyz movies --> ", movies);
+			} catch (error) {
+				console.error("Error fetching movies:", error);
+			}
+			setLoading(false);
+		};
+
+		fetchMovies();
+	}, [page]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -275,57 +306,14 @@ function MovieTable() {
         </div>
       )}
 
-      {/* Modal for editing the movie */}
-      {/* <Modal open={open} onClose={() => setOpen(false)}>
-        <div
-          style={{
-            padding: "20px",
-            background: "white",
-            margin: "10% auto",
-            width: "400px",
-          }}
-        >
-          <h2>{isEditing ? 'Edit Movie' : 'Add New Movie'}</h2>
-          <TextField
-            name="title"
-            label="Title"
-            value={selectedMovie?.title || ""}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            name="year"
-            label="Year"
-            value={selectedMovie?.year || ""}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            name="genre"
-            label="Genre"
-            value={selectedMovie?.genre || ""}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            name="image"
-            label="Image URL"
-            value={selectedMovie?.image || ""}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <Button onClick={handleSave} color="primary" variant="contained" className="m-4">
-            {isEditing ? 'Save Changes' : 'Add Movie'}
-          </Button>
-          <Button onClick={() => setOpen(false)} color="secondary" className="m-4">
-            Cancel
-          </Button>
-        </div>
-      </Modal> */}
+      {/* Success Snackbar */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message={successMessage}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
     </div>
   );
 }

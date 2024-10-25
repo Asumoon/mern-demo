@@ -1,6 +1,7 @@
-import * as mongoose from 'mongoose';
-const ObjectId = mongoose.Schema.Types.ObjectId;
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose = require("mongoose");
+var ObjectId = mongoose.Schema.Types.ObjectId;
 // experienceArray
 /**
  * @openapi
@@ -72,22 +73,18 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
  *         otherList:
  *           type: string
  */
-const experienceSchema = new mongoose.Schema({
-  role: { type: String },
-  company: { type: String },
-  startDate: { type: String },
-  endDate: { type: String },
-  location: { type: String },
-  roleDescription: { type: String },
-  achievements: { type: String },      // with List it will be array
-  languageUsed: [String],      // Array List
-  otherList: { type: String },      // Array List
+var experienceSchema = new mongoose.Schema({
+    role: { type: String },
+    company: { type: String },
+    startDate: { type: String },
+    endDate: { type: String },
+    location: { type: String },
+    roleDescription: { type: String },
+    achievements: { type: String },
+    languageUsed: [String],
+    otherList: { type: String }, // Array List
 });
-
-
 // example tech_stack: ['NodeJS', 'JavaScript(ES6+)', 'Angular 2+', 'TypeScript', 'SCSS']
-
-
 // tech_stack
 /**
  * @openapi
@@ -106,9 +103,7 @@ const experienceSchema = new mongoose.Schema({
  *           type: string
  *           default: nodejs.png
  */
-
 //  example: ['MongoDB', 'PostgreSQL', 'Firebase']
-
 // databases
 /**
  * @openapi
@@ -127,9 +122,7 @@ const experienceSchema = new mongoose.Schema({
  *           type: string
  *           default: mongodb.png
  */
-
 //  example: ['Git']
-
 // version_control
 /**
  * @openapi
@@ -148,9 +141,7 @@ const experienceSchema = new mongoose.Schema({
  *           type: string
  *           default: git.png
  */
-
 //  example: ['Serverless Framework', 'Heroku', 'Puppeteer', 'Google Analytics']
-
 // other
 /**
  * @openapi
@@ -169,8 +160,6 @@ const experienceSchema = new mongoose.Schema({
  *           type: string
  *           default: serverless_framework.png
  */
-
-
 // skillsArray
 /**
  * @openapi
@@ -218,9 +207,6 @@ const experienceSchema = new mongoose.Schema({
  *         other:
  *           type: string
  */
-
-
-
 //  educationArray
 /**
  * @openapi
@@ -268,17 +254,14 @@ const experienceSchema = new mongoose.Schema({
  *         description:
  *           type: string
  */
-const educationSchema = new mongoose.Schema({
-  active:  { type: Boolean, default: true },
-  university: { type: String },
-  branch: { type: String },
-  startDate: { type: String },
-  endDate: { type: String },
-  description: { type: String },
+var educationSchema = new mongoose.Schema({
+    active: { type: Boolean, default: true },
+    university: { type: String },
+    branch: { type: String },
+    startDate: { type: String },
+    endDate: { type: String },
+    description: { type: String },
 });
-
-
-
 // awardsArray
 /**
  * @openapi
@@ -308,12 +291,10 @@ const educationSchema = new mongoose.Schema({
  *         awardDescription:
  *           type: string
  */
-const awardsSchema = new mongoose.Schema({
-  awardName: { type: String },
-  awardDescription: { type: String },
+var awardsSchema = new mongoose.Schema({
+    awardName: { type: String },
+    awardDescription: { type: String },
 });
-
-
 //  projectsArray
 /**
  * @openapi
@@ -367,18 +348,15 @@ const awardsSchema = new mongoose.Schema({
  *         languageUsed:
  *           type: string
  */
-const projectsSchema = new mongoose.Schema({
-  projectName: { type: String },
-  projectDescription: { type: String },
-  role: { type: String },
-  url: { type: String },
-  languageUsed: [String],
-  achievements: { type: String },
-  type: { type: String, enum: ['Freelance', 'Normal', 'Volunteer'] },
+var projectsSchema = new mongoose.Schema({
+    projectName: { type: String },
+    projectDescription: { type: String },
+    role: { type: String },
+    url: { type: String },
+    languageUsed: [String],
+    achievements: { type: String },
+    type: { type: String, enum: ['Freelance', 'Normal', 'Volunteer'] },
 });
-
-
-
 //  socialMediaArray
 /**
  * @openapi
@@ -397,7 +375,7 @@ const projectsSchema = new mongoose.Schema({
  *           default: Linkedin
  *         logoURL:
  *           type: string
- *           default: 
+ *           default:
  *         landingLink:
  *           type: string
  *           default: https://www.linkedin.com/in/sundar-ghimire/
@@ -420,19 +398,16 @@ const projectsSchema = new mongoose.Schema({
  *         icon:
  *           type: string
  */
-const socialMediaSchema = new mongoose.Schema({
-  createdBy: { type: ObjectId, ref: 'User' },
-  createdAt: { type: Date, default: Date.now },
-  updatedBy: { type: ObjectId, ref: 'User' },
-  updatedOn: { type: Date, default: Date.now },
-  name: { type: String },
-  logoURL: { type: String },
-  icon: { type: String },
-  landingLink: { type: String },
+var socialMediaSchema = new mongoose.Schema({
+    createdBy: { type: ObjectId, ref: 'User' },
+    createdAt: { type: Date, default: Date.now },
+    updatedBy: { type: ObjectId, ref: 'User' },
+    updatedOn: { type: Date, default: Date.now },
+    name: { type: String },
+    logoURL: { type: String },
+    icon: { type: String },
+    landingLink: { type: String },
 });
-
-
-
 // contactResume
 /**
 * @openapi
@@ -474,20 +449,16 @@ const socialMediaSchema = new mongoose.Schema({
 *         country:
 *           type: string
 */
-const contactSchema = new mongoose.Schema({
-  createdBy: { type: ObjectId, ref: 'User' },
-  createdAt: { type: Date, default: Date.now },
-  updatedBy: { type: ObjectId, ref: 'User' },
-  updatedOn: { type: Date, default: Date.now },
-  email: { type: String },
-  phone: { type: String },
-  address: { type: String },
-  country: { type: String },
+var contactSchema = new mongoose.Schema({
+    createdBy: { type: ObjectId, ref: 'User' },
+    createdAt: { type: Date, default: Date.now },
+    updatedBy: { type: ObjectId, ref: 'User' },
+    updatedOn: { type: Date, default: Date.now },
+    email: { type: String },
+    phone: { type: String },
+    address: { type: String },
+    country: { type: String },
 });
-
-
-
-
 // M A I N
 /**
  * @openapi
@@ -620,39 +591,35 @@ const contactSchema = new mongoose.Schema({
  *         socialMedia:
  *           type: array
  */
-
-const resumeSchema = new mongoose.Schema({
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-  createdBy: { type: ObjectId, ref: 'User' },
-  updatedBy: { type: ObjectId, ref: 'User' },
-  name: { type: String },
-  birthday: { type: String },
-  role: { type: String },
-  careerSummary: { type: String },
-  intro: { type: String },
-  longIntro: { type: String },
-  description: { type: String },
-  image: { type: String },
-  siteUrl: { type: String },
-  copyrightText: { type: String },
-  address: { type: String },
-  active: { type: Boolean, default: true },
-  code:{ type: String },
-
-  education: [educationSchema],
-  skills: mongoose.Schema.Types.Mixed,
-  language: mongoose.Schema.Types.Mixed,
-  interests: mongoose.Schema.Types.Mixed,
-  others: mongoose.Schema.Types.Mixed,
-  experience: [experienceSchema],
-  projects: [projectsSchema],
-  volunteerWorks: [projectsSchema],
-  awards: [awardsSchema],
-
-  contact: [contactSchema],
-  socialMedia: [socialMediaSchema],
+var resumeSchema = new mongoose.Schema({
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
+    createdBy: { type: ObjectId, ref: 'User' },
+    updatedBy: { type: ObjectId, ref: 'User' },
+    name: { type: String },
+    birthday: { type: String },
+    role: { type: String },
+    careerSummary: { type: String },
+    intro: { type: String },
+    longIntro: { type: String },
+    description: { type: String },
+    image: { type: String },
+    siteUrl: { type: String },
+    copyrightText: { type: String },
+    address: { type: String },
+    active: { type: Boolean, default: true },
+    code: { type: String },
+    education: [educationSchema],
+    skills: mongoose.Schema.Types.Mixed,
+    language: mongoose.Schema.Types.Mixed,
+    interests: mongoose.Schema.Types.Mixed,
+    others: mongoose.Schema.Types.Mixed,
+    experience: [experienceSchema],
+    projects: [projectsSchema],
+    volunteerWorks: [projectsSchema],
+    awards: [awardsSchema],
+    contact: [contactSchema],
+    socialMedia: [socialMediaSchema],
 });
-
-
-export default mongoose.model('resume', resumeSchema);
+exports.default = mongoose.model('resume', resumeSchema);
+//# sourceMappingURL=resume.model.js.map

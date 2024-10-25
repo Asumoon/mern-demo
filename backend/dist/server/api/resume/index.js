@@ -1,17 +1,15 @@
-const express = require('express');
-const router = express.Router();
-import ResumeController from './resume.controller';
-const controller = new ResumeController();
-
-import AuthService from '../../auth/auth.service';
-const auth = new AuthService();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express = require('express');
+var router = express.Router();
+var resume_controller_1 = require("./resume.controller");
+var controller = new resume_controller_1.default();
+var auth_service_1 = require("../../auth/auth.service");
+var auth = new auth_service_1.default();
 // import * as multer from 'multer';
 // import * as GridFsStorage from 'multer-gridfs-storage';
-
-import Config from '../../config';
-const config: any = Config(process.env.NODE_ENV);
-
+var config_1 = require("../../config");
+var config = (0, config_1.default)(process.env.NODE_ENV);
 /**
  * @openapi
  * /api/resume:
@@ -19,7 +17,7 @@ const config: any = Config(process.env.NODE_ENV);
  *     tags:
  *     - Resume
  *     summary: Get all Resume
- *     description:  detail about Resume 
+ *     description:  detail about Resume
  *     responses:
  *       200:
  *         description: success
@@ -27,9 +25,6 @@ const config: any = Config(process.env.NODE_ENV);
  *         description: Unable to get lists
  */
 router.get('/:code', controller.getDetail);
-
-router.get('/resume-active-code/:code', controller.getActiveCode);
-
 /**
  * @openapi
  * /api/resume:
@@ -37,7 +32,7 @@ router.get('/resume-active-code/:code', controller.getActiveCode);
  *     tags:
  *     - Resume
  *     summary: Add New  Resume (***Protected***)
- *     description: Create Resume 
+ *     description: Create Resume
  *     requestBody:
  *      required: true
  *      content:
@@ -54,8 +49,7 @@ router.get('/resume-active-code/:code', controller.getActiveCode);
  *       204:
  *         description: Unable to create
  */
- router.post('/', auth.isAuthenticated(), controller.createNew); 
-
+router.post('/', auth.isAuthenticated(), controller.createNew);
 /**
  * @openapi
  * /api/resume/{id}:
@@ -86,7 +80,6 @@ router.get('/resume-active-code/:code', controller.getActiveCode);
  *         description: Unable to create
  */
 router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
-
 /**
  * @openapi
  * /api/resume/{id}:
@@ -94,7 +87,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *     tags:
  *     - Resume
  *     summary: Get Single Resume item (***Protected***)
- *     description: Detail about single Resume item 
+ *     description: Detail about single Resume item
  *     parameters:
  *      - name: id
  *        in: path
@@ -106,8 +99,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *       204:
  *         description: Unable to get lists
  */
- router.get('/:id', auth.isAuthenticated(), controller.getSingleDetail);
-
+router.get('/:id', auth.isAuthenticated(), controller.getSingleDetail);
 /**
  * @openapi
  * /api/resume/{id}:
@@ -115,7 +107,7 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *     tags:
  *     - Resume
  *     summary: Delete a single Setting & id is ObjectId (***Protected***)
- *     description:  detail about Resume 
+ *     description:  detail about Resume
  *     parameters:
  *      - name: id
  *        in: path
@@ -127,12 +119,8 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/:id', auth.isAuthenticated(), controller.deleteSingle);
-
-
-
+router.delete('/:id', auth.isAuthenticated(), controller.deleteSingle);
 // contact
-
 /**
  * @openapi
  * /api/resume/contact/{resumeId}:
@@ -163,7 +151,6 @@ router.put('/:id', auth.isAuthenticated(), controller.updateSingle);
  *         description: Unable to create
  */
 router.post('/contact/:resumeId', auth.isAuthenticated(), controller.createNewContact);
-
 /**
  * @openapi
  * /api/resume/contact/{id}:
@@ -194,7 +181,6 @@ router.post('/contact/:resumeId', auth.isAuthenticated(), controller.createNewCo
  *         description: Unable to create
  */
 router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList);
-
 /**
  * @openapi
  * /api/resume/contact/{id}:
@@ -214,12 +200,8 @@ router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList)
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/contact/:id', auth.isAuthenticated(), controller.deleteSingleContact);
-
-
-
+router.delete('/contact/:id', auth.isAuthenticated(), controller.deleteSingleContact);
 // social-media
-
 /**
  * @openapi
  * /api/resume/social-media/{resumeId}:
@@ -249,8 +231,7 @@ router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList)
  *       204:
  *         description: Unable to create
  */
- router.post('/social-media/:resumeId', auth.isAuthenticated(), controller.createNewSocialMedia);
-
+router.post('/social-media/:resumeId', auth.isAuthenticated(), controller.createNewSocialMedia);
 /**
 * @openapi
 * /api/resume/social-media/{id}:
@@ -280,8 +261,7 @@ router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList)
 *       204:
 *         description: Unable to create
 */
- router.put('/social-media/:id', auth.isAuthenticated(), controller.updateSocialMediaList); 
-
+router.put('/social-media/:id', auth.isAuthenticated(), controller.updateSocialMediaList);
 /**
  * @openapi
  * /api/resume/social-media/{id}:
@@ -289,7 +269,7 @@ router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList)
  *     tags:
  *     - Resume Social Media
  *     summary: Delete single Social Media item (***Protected***)
- *     description: Delete single Social Media item 
+ *     description: Delete single Social Media item
  *     parameters:
  *      - name: id
  *        in: path
@@ -302,11 +282,7 @@ router.put('/contact/:id', auth.isAuthenticated(), controller.updateContactList)
  *         description: Unable to Delete.
  */
 router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSingleSocialMedia);
-
-
-
 // education
-
 /**
  * @openapi
  * /api/resume/education/{resumeId}:
@@ -336,8 +312,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       204:
  *         description: Unable to create
  */
- router.post('/education/:resumeId', auth.isAuthenticated(), controller.createNewEducation);
-
+router.post('/education/:resumeId', auth.isAuthenticated(), controller.createNewEducation);
 /**
  * @openapi
  * /api/resume/education/{id}:
@@ -345,7 +320,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *     tags:
  *     - Resume Education
  *     summary: Delete single Social Media item (***Protected***)
- *     description: Delete single Social Media item 
+ *     description: Delete single Social Media item
  *     parameters:
  *      - name: id
  *        in: path
@@ -357,12 +332,8 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/education/:id', auth.isAuthenticated(), controller.deleteSingleEducation);
- 
-
-
+router.delete('/education/:id', auth.isAuthenticated(), controller.deleteSingleEducation);
 // experience
-
 /**
  * @openapi
  * /api/resume/experience/{resumeId}:
@@ -392,8 +363,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       204:
  *         description: Unable to create
  */
- router.post('/experience/:resumeId', auth.isAuthenticated(), controller.createNewExperience);
-
+router.post('/experience/:resumeId', auth.isAuthenticated(), controller.createNewExperience);
 /**
  * @openapi
  * /api/resume/experience/{id}:
@@ -401,7 +371,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *     tags:
  *     - Resume Experience
  *     summary: Delete single Social Media item (***Protected***)
- *     description: Delete single Social Media item 
+ *     description: Delete single Social Media item
  *     parameters:
  *      - name: id
  *        in: path
@@ -413,12 +383,8 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/experience/:id', auth.isAuthenticated(), controller.deleteSingleExperience);
- 
-
-
+router.delete('/experience/:id', auth.isAuthenticated(), controller.deleteSingleExperience);
 //  projects
-
 /**
  * @openapi
  * /api/resume/projects/{resumeId}:
@@ -448,8 +414,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       204:
  *         description: Unable to create
  */
- router.post('/projects/:resumeId', auth.isAuthenticated(), controller.createNewProjects);
-
+router.post('/projects/:resumeId', auth.isAuthenticated(), controller.createNewProjects);
 /**
  * @openapi
  * /api/resume/projects/{id}:
@@ -457,7 +422,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *     tags:
  *     - Resume Projects
  *     summary: Delete single Social Media item (***Protected***)
- *     description: Delete single Social Media item 
+ *     description: Delete single Social Media item
  *     parameters:
  *      - name: id
  *        in: path
@@ -469,12 +434,8 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/projects/:id', auth.isAuthenticated(), controller.deleteSingleProjects);
- 
-
-
+router.delete('/projects/:id', auth.isAuthenticated(), controller.deleteSingleProjects);
 //  Awards
-
 /**
  * @openapi
  * /api/resume/awards/{resumeId}:
@@ -504,8 +465,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       204:
  *         description: Unable to create
  */
- router.post('/awards/:resumeId', auth.isAuthenticated(), controller.createNewAwards);
-
+router.post('/awards/:resumeId', auth.isAuthenticated(), controller.createNewAwards);
 /**
  * @openapi
  * /api/resume/awards/{id}:
@@ -513,7 +473,7 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *     tags:
  *     - Resume Awards
  *     summary: Delete single Social Media item (***Protected***)
- *     description: Delete single Social Media item 
+ *     description: Delete single Social Media item
  *     parameters:
  *      - name: id
  *        in: path
@@ -525,11 +485,8 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       404:
  *         description: Unable to Delete.
  */
- router.delete('/awards/:id', auth.isAuthenticated(), controller.deleteSingleAwards);
- 
-
- //  Skills
-
+router.delete('/awards/:id', auth.isAuthenticated(), controller.deleteSingleAwards);
+//  Skills
 /**
  * @openapi
  * /api/resume/skills/{resumeId}:
@@ -559,7 +516,6 @@ router.delete('/social-media/:id', auth.isAuthenticated(), controller.deleteSing
  *       204:
  *         description: Unable to create
  */
- router.put('/skills/:resumeId', auth.isAuthenticated(), controller.getResumeForSkillsUpdate, controller.updateSkills);
-
-
-module.exports = router; 
+router.put('/skills/:resumeId', auth.isAuthenticated(), controller.getResumeForSkillsUpdate, controller.updateSkills);
+module.exports = router;
+//# sourceMappingURL=index.js.map
