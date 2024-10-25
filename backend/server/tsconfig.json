@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist/server",
+    // "target": "es5",
+    "baseUrl": "",
+    "module": "commonjs",
+    // "strict": true,
+    // "esModuleInterop": true  
+    "allowJs": true,
+    "resolveJsonModule": true,
+  },
+
+}

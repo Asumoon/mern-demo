@@ -1,0 +1,58 @@
+# Folder Structure Information 
+// your-react-app
+
+│
+├── /public                    # Public assets (static files, index.html)
+│   ├── /assets                # Static assets like images, fonts, etc.
+│   └── index.html             # Main HTML file
+│
+├── /src                       # Main source folder for React app
+│   ├── /core                  # Core services, global configurations
+│   │   ├── /config            # Global configuration files (e.g., env setup)
+│   │   ├── /helpers           # Global helper functions
+│   │   ├── /services          # Core services (e.g., AuthService, HttpService)
+│   │   └── /constants         # Application-wide constants
+│   │
+│   ├── /modules               # HMVC-inspired feature modules
+│   │   ├── /auth              # Auth module (MVC triad for authentication)
+│   │   │   ├── /models        # Models for auth (e.g., User model, auth state)
+│   │   │   ├── /controllers   # Business logic (e.g., API calls, validation)
+│   │   │   ├── /views         # React components (UI) for login, signup, etc.
+│   │   │   └── routes.js      # Routes related to the auth module
+│   │   │
+│   │   ├── /dashboard         # Dashboard module
+│   │   │   ├── /models        # Dashboard-specific state/data models
+│   │   │   ├── /controllers   # Logic for dashboard (e.g., fetching data)
+│   │   │   ├── /views         # UI components for the dashboard
+│   │   │   └── routes.js      # Dashboard routes
+│   │   │
+│   │   ├── /profile           # Profile module (user details, settings)
+│   │   │   ├── /models        # Profile-related data models
+│   │   │   ├── /controllers   # Profile-related business logic
+│   │   │   ├── /views         # UI components for the profile
+│   │   │   └── routes.js      # Profile routes
+│   │   │
+│   │   └── /shared            # Shared UI components/services between modules
+│   │       ├── /components    # Shared reusable React components (e.g., Button, Navbar)
+│   │       └── /services      # Shared services (e.g., notification service)
+│   │
+│   ├── /layouts               # Common layouts (e.g., header, footer, sidebar)
+│   ├── /hooks                 # Custom React hooks
+│   ├── /contexts              # React Context API providers
+│   ├── /styles                # Global styles (CSS, SCSS, etc.)
+│   ├── /utils                 # Utility functions (e.g., formatting, parsing)
+│   ├── App.js                 # Main app component (global layout, route setup)
+│   ├── index.js               # Application entry point (ReactDOM.render)
+│   └── routes.js              # Root routes file to aggregate module routes
+│
+├── .env                       # Environment variables
+├── package.json               # Dependencies and scripts
+├── README.md                  # Project documentation
+└── .gitignore                 # Git ignore configuration
+
+
+############################ Source #####################
+
+https://codesandbox.io/s/sidebar-tailwind-8dkck3?file=/src/components/Sidebar.tsx:14232-14239
+
+Design Pattern : https://refine.dev/blog/react-design-patterns/
